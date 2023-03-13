@@ -163,7 +163,7 @@ process runMinimap_realtime {
   # Remove adapters, filter reads > 1000bp and q > 8, remove Lambda control reads
   porechop -i ${queryFile} -o adaptertrimmed -v 0 --no_split
   NanoFilt -q 8 -l 1000 adaptertrimmed > sizefilt
-  cat sizefilt | NanoLyse -r $PWD/database/Lambda_ref.fasta | cat  > lambfilt
+  cat sizefilt | NanoLyse -r $PWD/lambda/Lambda_ref.fasta | cat  > lambfilt
 
   # Count reads passed QC
   cat lambfilt | echo \$((`wc -l`/4)) | cat > read_counts_qc
@@ -225,7 +225,7 @@ process runMinimap_batch {
   # Remove adapters, filter reads > 1000bp and q > 10, remove Lambda control reads
   porechop -i merged.fastq -o adaptertrimmed -v 0 --no_split
   NanoFilt -q 8 -l 1000 adaptertrimmed > sizefilt
-  cat sizefilt | NanoLyse -r $PWD/database/Lambda_ref.fasta | cat  > lambfilt
+  cat sizefilt | NanoLyse -r $PWD/lambda/Lambda_ref.fasta | cat  > lambfilt
 
   # Counts reads passed QC
   cat lambfilt | echo \$((`wc -l`/4)) | cat > read_counts_qc
