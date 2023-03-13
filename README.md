@@ -27,7 +27,7 @@ sudo docker build -t rapid_pipe .
 or pull from steveknobloch1444/rapid_pipe with:  
 ```
 docker pull steveknobloch1444/rapid_pipe
-docker rename steveknobloch1444/rapid_pipe rapid_pipe
+docker image tag steveknobloch1444/rapid_pipe rapid_pipe
 ```  
 
 ### Run a simple command:  
