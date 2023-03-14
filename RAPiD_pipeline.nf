@@ -72,9 +72,9 @@ if (params.sensitive) {
 
 // Define report output through params.subspecies
 if (params.subspecies) {
-  sub = "\$9"
+  sub = "\$8"
 } else {
-  sub = "\$10"
+  sub = "\$7"
 }
 
 // Validate inputs
@@ -214,7 +214,7 @@ process runMinimap_batch {
   file("batch_counts.out")
   file("batch_reads.stat")
   file("batch_counts.out") into report_ch
-
+  file("batch_reads.stat") into report2_ch
 
   script:
   """
@@ -318,6 +318,7 @@ process reportBatch {
 
   input:
   file("batch_counts.out") from report_ch
+  file("batch_reads.stat") from report2_ch
 
   output:
   file("RAPiD_report.txt")
@@ -344,7 +345,7 @@ process reportBatch {
   export TERM=linux
   tabs 25
   echo -e "\nRAPiD pipeline v 1.0. \nReport saved to $params.output/RAPiD_report.txt."
-  echo -e "\n\n \$(awk '{sum2 += \$2 } END {print sum2}' $PWD/temp/batch_reads.stat) reads passed quality filtering from \$(awk '{sum += \$1 } END {print sum}' $PWD/temp/batch_reads.stat) basecalled reads.\n \$(awk -F '\t' '{sum += \$2 } END {if (sum == "") print "0"; else print sum}' batch_counts2.out) reads matched a pathogen in the database. \n\n-Results-\n\nTarget Species \tRead counts \tNormalized score \tMean per-base identity \tConfidence score" | \
+  echo -e "\n\n \$(awk '{sum2 += \$2 } END {print sum2}' batch_reads.stat) reads passed quality filtering from \$(awk '{sum += \$1 } END {print sum}' batch_reads.stat) basecalled reads.\n \$(awk -F '\t' '{sum += \$2 } END {if (sum == "") print "0"; else print sum}' batch_counts2.out) reads matched a pathogen in the database. \n\n-Results-\n\nTarget Species \tRead counts \tNormalized score \tMean per-base identity \tConfidence score" | \
   cat - batch_counts3.out | head -19
   echo "(showing top 10 matches)"
 

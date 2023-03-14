@@ -60,7 +60,7 @@ If you get a permission error for the docker container, first run: ```sudo chmod
 ```--index```       path to alternative minimap2 index file  
 ```--taxa```        path to taxonomic look-up file  
 ```--threads```     threads [default: 1]  
-```--subspecies```  performs analysis at sub-species level  
+```--subspecies```  performs analysis at sub-species level (currently only supported for custom databases)  
 ```--sensitive```   performs analysis in sensitive mode i.e. without cut-off values  
 
 ```--help```        help message
