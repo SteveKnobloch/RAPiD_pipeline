@@ -338,7 +338,7 @@ process reportBatch {
   cat batch_counts2.out | awk -F'\t' 'BEGIN {OFS = FS} {if (\$2 > 1  && \$3 >= 70 && \$3 < 75) conf = "medium"; else if (\$2 > 1 && \$3 >= 75) conf = "high"; else conf = "low"; print \$1, \$2, \$3, \$4, conf}' > batch_counts3.out
 
   # Print results to RAPiD_summary.txt in output directory
-  echo -e "RAPiD pipeline v 1.0  Time: \$(date) \n\n \$(awk '{sum2 += \$2 } END {print sum2}' $PWD/temp/batch_reads.stat) reads passed quality filtering from \$(awk '{sum += \$1 } END {print sum}' $PWD/temp/batch_reads.stat) basecalled reads.\n \$(awk -F '\t' '{sum += \$2 } END {if (sum == "") print "0"; else print sum}' batch_counts2.out) reads matched a pathogen in the database. \n\nTarget_species \tRead_counts \tNormalized_alignment_score \tMean_per_base_identity \tConfidence_score" | \
+  echo -e "RAPiD pipeline v 1.0  Time: \$(date) \n\n \$(awk '{sum2 += \$2 } END {print sum2}' batch_reads.stat) reads passed quality filtering from \$(awk '{sum += \$1 } END {print sum}' batch_reads.stat) basecalled reads.\n \$(awk -F '\t' '{sum += \$2 } END {if (sum == "") print "0"; else print sum}' batch_counts2.out) reads matched a pathogen in the database. \n\nTarget_species \tRead_counts \tNormalized_alignment_score \tMean_per_base_identity \tConfidence_score" | \
   cat - batch_counts3.out > RAPiD_summary.txt
 
   # Print results to screen
