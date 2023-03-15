@@ -14,8 +14,8 @@ Docker (install here: https://docs.docker.com/engine/install/ubuntu/)
 git clone https://github.com/SteveKnobloch/RAPiD_pipeline.git
 cd RAPiD_pipline
 
-wget https://figshare.com/ndownloader/files/39546862
-tar -xvf 39546862
+wget https://figshare.com/ndownloader/files/39594073
+tar -xvf 39594073
 ```
 
 ### Build docker image:  
